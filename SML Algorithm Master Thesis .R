@@ -68,6 +68,8 @@ pacman::p_load(countrycode)
 library(countrycode)
 
 # load files / create data
+setwd("/Users/simon/Documents/repo/Master-Thesis-Marco-Wyss")
+# setwd("/Users/marco/Documents/repo/Master-Thesis-Marco-Wyss")
 
 abs <- read_excel("EEG_Daten_clean.xlsx", 
                        col_types = c("numeric", "date", "numeric", 
@@ -116,7 +118,7 @@ options(stringsAsFactors = FALSE)
 
 # create a custom theme for the layout
 
-theme_MT <- function () { 
+theme_SM <- function () { 
   theme_classic() +
     theme(
       text = element_text(size=12, colour = "black"),
@@ -162,9 +164,9 @@ abs_folds
 # (1) recipes 
 my_rec <- function(outcome) {
   abs_train %>% 
-    select(statement.ID, Text, {{outcome}}) %>% 
+    dplyr::select(Text, {{outcome}}) %>% 
     recipe() %>% 
-    update_role(Text = "predictor") %>%
+    update_role(Text, new_role = "predictor") %>%
     update_role({{outcome}}, new_role = "outcome") %>%
     step_tokenize(Text, token = "word_stems") %>%
     # step_tokenize(Abstract, Article.Title, Author.Keywords, Keywords.Plus, engine = "spacyr") %>%
@@ -177,16 +179,6 @@ my_rec <- function(outcome) {
 
 rec <- lapply(variables, my_rec)
 
-
-# function to capitalise first letter in a string
-simple_cap <- function(x) {
-  
-  s <- strsplit(x, " ")[[1]]
-  
-  paste(toupper(substring(s, 1,1)), substring(s, 2),
-        sep="", collapse=" ")
-  
-}
 
 ##################################
 ## (6) predict all variables on entire data (before that one should actually tune the model, but now I do not have time for that):bs
