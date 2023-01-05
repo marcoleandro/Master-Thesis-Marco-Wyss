@@ -43,7 +43,7 @@ library(tidyverse)
 
 # load files / create data
 # setwd("/Users/marcowyss/master-thesis-mw/Data")
-# setwd("/Users/simon/Documents/repo/Master-Thesis-Marco-Wyss")
+setwd("/Users/simon/Documents/repo/Master-Thesis-Marco-Wyss")
 
 abs <- read.csv("EEG_Daten_clean.csv", header = T)
 
@@ -270,7 +270,7 @@ sm_fit <- function(res1, wf1){
 # use trained workflow to predict
 # -------------------------------
 
-sm_predict <- function(final_model){
+sm_predict <- function(final_model, abstract){
   
   # convert list to df
   fitted_wf <- pluck(final_model$.workflow, 1)
@@ -426,49 +426,42 @@ ggsave(p_forest, filename = "fold_and_oos_forest_coral.pdf", height = 6, width =
 # (3) F1 Score is the harmonic mean of precision and sensitivity. The higher the F1 Score, the better are precision and Sensitivity
 
 # predict CH data
+ch_dat <- readRDS("CH_energy_SML_predict.Rds")
 
-library(readr)
-library(dplyr)
-install.packages("tm")
-library(tm)
-library(SnowballC)
+# make sure the name of the text variable is the same as in the training data.
+ch_dat <- ch_dat %>% 
+  as_tibble() %>% 
+  rename(text = Text)
 
-corpus = Corpus(VectorSource(`CH_data_SML_predict Kopie (1)`$Text))
+# test if it works for the first model, i.e. the first DV
+sm_predict(model_forest[[i]], ch_dat)
 
-corpus = tm_map(corpus, PlainTextDocument)
-corpus = tm_map(corpus, tolower)
-corpus = tm_map(corpus, removePunctuation)
-stop_words_german <- read_csv("stop_words_german.txt", col_names = FALSE)
-myStopwords <- as.vector(stop_words_german)
-corpus = tm_map(corpus, removeWords, c(stopwords("german"), unlist(myStopwords)))
-
-CH_predict <- function(final_model){
-  
-  # convert list to df
-  fitted_wf <- pluck(final_model$.workflow, 1)
-  
-  predict(fitted_wf, new_data = corpus)
+# function to predict all variables
+predict_all_variables <- function(model_forest){
+  # initialise vector
+  predictions <- c()
+  # loop through variables and make predictions
+  for (i in 1:length(variables)){
+    # bind predictions
+    predictions <- rbind(predictions, t(sm_predict(model_forest[[i]], ch_dat))) 
+    print(paste0("Predictions for variable '", variables[i], "' finsihed"))
+  }
+  # transpose and rename
+  predictions <- t(predictions)
+  # transform to numeric
+  predictions <- as_tibble(predictions) %>% mutate_if(is.character, as.numeric)
+  # output
+  predictions
 }
 
+# apply the function
+predictions_boost_tuned <- predict_all_variables(model_forest)
 
-ch_res_forest <- list()
-ch_model_forest <- list()
-for (i in 1:length(rec)){
-  ch_res_forest[[i]] <- sm_train(sm_wf(rec[[i]], sm_spec("forest")), sm_spec("forest"))
-  ch_model_forest[[i]] <- sm_fit(ch_res_forest[[i]], sm_wf(rec[[i]], sm_spec("forest")))
-  print(paste("Forest model", i, "complete"))
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# quickly look at the distribution of the variables
+predictions_boost_tuned %>% 
+  pivot_longer(., cols = everything()) %>% 
+  mutate(name = factor(name, levels = variables)) %>% 
+  ggplot(., aes(name, value)) +
+  geom_col() +
+  coord_flip() +
+  theme_light()
