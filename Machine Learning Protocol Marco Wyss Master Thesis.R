@@ -426,18 +426,19 @@ ggsave(p_forest, filename = "fold_and_oos_forest_coral.pdf", height = 6, width =
 # (3) F1 Score is the harmonic mean of precision and sensitivity. The higher the F1 Score, the better are precision and Sensitivity
 
 # predict CH data
-ch_dat <- readRDS("CH_energy_SML_predict.Rds")
+ch_dat <- readRDS("CH_energy_SML_predict.Rds") %>% as_tibble()
+ch_dat_debate <- readRDS("CH_energydebates_dataset_MAMW.rds") %>% as_tibble()
+glimpse(ch_dat_debate)
 
 # make sure the name of the text variable is the same as in the training data.
 ch_dat <- ch_dat %>% 
-  as_tibble() %>% 
   rename(text = Text)
 
 # test if it works for the first model, i.e. the first DV
 sm_predict(model_forest[[i]], ch_dat)
 
 # function to predict all variables
-predict_all_variables <- function(model_forest){
+predict_all_variables <- function(model_forest, ch_dat){
   # initialise vector
   predictions <- c()
   # loop through variables and make predictions
@@ -448,6 +449,7 @@ predict_all_variables <- function(model_forest){
   }
   # transpose and rename
   predictions <- t(predictions)
+  colnames(predictions) <- variables
   # transform to numeric
   predictions <- as_tibble(predictions) %>% mutate_if(is.character, as.numeric)
   # output
@@ -455,13 +457,33 @@ predict_all_variables <- function(model_forest){
 }
 
 # apply the function
-predictions_boost_tuned <- predict_all_variables(model_forest)
+predictions_boost_tuned <- predict_all_variables(model_forest, ch_dat)
 
-# quickly look at the distribution of the variables
-predictions_boost_tuned %>% 
+p_dist_perc_ch <- predictions_boost_tuned %>% 
   pivot_longer(., cols = everything()) %>% 
-  mutate(name = factor(name, levels = variables)) %>% 
-  ggplot(., aes(name, value)) +
+  mutate(name = factor(name, levels = rev(variables))) %>% 
+  ggplot(., aes(name, (value)/sum(value))) +
   geom_col() +
+  scale_y_continuous(labels = percent, limits = c(0, 0.15)) +
+  labs(title = "Switzerland", y = "Percentage", x = "Concepts") +
   coord_flip() +
   theme_light()
+p_dist_perc_ch
+
+p_dist_perc_de_train <- abs %>% 
+  dplyr::select(variables) %>% 
+  mutate_all(as.character) %>% 
+  mutate_all(as.numeric) %>% 
+  pivot_longer(., cols = everything()) %>% 
+  mutate(name = factor(name, levels = rev(variables))) %>% 
+  ggplot(., aes(name, (value)/sum(value))) +
+  geom_col() +
+  scale_y_continuous(labels = percent, limits = c(0, 0.15)) +
+  labs(title = "Germany", y = "Percentage", x = "Concepts") +
+  coord_flip() +
+  theme_light()  
+p_dist_perc_de_train
+
+p_dist_perc_arr <- ggarrange(p_dist_perc_ch, p_dist_perc_de_train)
+ggsave(p_dist_perc_arr, file = "Plots/distribution_percentage_arranged.pdf")
+
