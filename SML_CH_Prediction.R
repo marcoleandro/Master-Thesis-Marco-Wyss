@@ -489,7 +489,7 @@ p_dist_perc_de_train
 p_dist_perc_arr <- ggarrange(p_dist_perc_ch, p_dist_perc_de_train)
 ggsave(p_dist_perc_arr, file = "Plots/distribution_percentage_arranged.pdf")
 
-# confusion matrix
+# reliability checks
 
 CH_relcheck <- readRDS("CH_energy_SML_reliabilitycheck.rds") %>% as_tibble()
 
@@ -500,11 +500,33 @@ predictions_relcheck <- predict_all_variables(model_forest, CH_relcheck)
 
 ch_relcheck_predicted <- cbind(CH_relcheck, predictions_relcheck)
 
-install.packages("caret")
-library(caret)
+sum(ch_relcheck_predicted$Renewables == 1 & ch_relcheck_predicted$renewables == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$Solar == 1 & ch_relcheck_predicted$solar == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$Wind == 1 & ch_relcheck_predicted$wind == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$Bio == 1 & ch_relcheck_predicted$bio == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$Nuclear == 1 & ch_relcheck_predicted$nuclear == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Environmental Protection` == 1 & ch_relcheck_predicted$environmental_protection == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Security of Electricity Supply` == 1 & ch_relcheck_predicted$security_of_electricity_supply == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Avoidance of Dependencies` == 1 & ch_relcheck_predicted$avoidance_of_dependencies == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Costs of Electricity` == 1 & ch_relcheck_predicted$costs_of_electricity == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Cheaper RE Technology` == 1 & ch_relcheck_predicted$cheaper_re_technology == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Competitiveness of Industry` == 1 & ch_relcheck_predicted$competitiveness_of_industry == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Value Chain` == 1 & ch_relcheck_predicted$value_chain == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$Innovation == 1 & ch_relcheck_predicted$innovation == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$Employment == 1 & ch_relcheck_predicted$employment == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$Export == 1 & ch_relcheck_predicted$export == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Energy Democracy` == 1 & ch_relcheck_predicted$energy_democracy == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Climate Change Mitigation` == 1 & ch_relcheck_predicted$climate_change_mitigation == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Pollution Reduction` == 1 & ch_relcheck_predicted$pollution_reduction == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Sector Coupling` == 1 & ch_relcheck_predicted$sector_coupling == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Grid Extension` == 1 & ch_relcheck_predicted$grid_extension == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Energy Storage` == 1 & ch_relcheck_predicted$energy_storage == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Increase of Actor Variety` == 1 & ch_relcheck_predicted$increase_of_actor_variety == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Costs for Consumers` == 1 & ch_relcheck_predicted$costs_for_consumers == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Employment in RE Sector` == 1 & ch_relcheck_predicted$employment_in_re_sector == 1)/nrow(ch_relcheck_predicted)
+sum(ch_relcheck_predicted$`Employment in Solar Industry` == 1 & ch_relcheck_predicted$employment_in_solar_industry == 1)/nrow(ch_relcheck_predicted)
 
-#Creating confusion matrix
-matrix_relcheck <- confusionMatrix(data=ch_relcheck_predicted, reference = predictions_relcheck)
+test <- ch_relcheck_predicted %>% select(Renewables, renewables, `Value Chain`, value_chain)
 
   
   
