@@ -11,7 +11,7 @@
 # lapply(libs, require, character.only = TRUE)
 
 rm(list = ls())
-
+library(caret)
 library(dplyr)
 library(ggplot2)
 library(ggsci)
@@ -46,6 +46,10 @@ library(tidyverse)
 setwd("/Users/simon/Documents/repo/Master-Thesis-Marco-Wyss")
 
 abs <- read.csv("EEG_Daten_clean.csv", header = T)
+
+abs$speaker
+
+abs$text[1]
 
 # rename variables - lower cap and underscore instead of space 
 colnames(abs) <- gsub(".", "_", str_to_lower(colnames(abs)), fixed = T)
@@ -429,22 +433,25 @@ ggsave(p_forest, filename = "fold_and_oos_forest_coral.pdf", height = 6, width =
 ch_dat <- readRDS("CH_energy_SML_predict.Rds") %>% as_tibble()
 ch_dat_debate <- readRDS("CH_energydebates_dataset_MAMW.rds") %>% as_tibble()
 glimpse(ch_dat_debate)
+ch_dat_debate <- ch_dat_debate[ch_dat_debate$ID %in% ch_dat$ID,]
+ch_dat_debate$text <- ch_dat$Text # use translated text
 
 # make sure the name of the text variable is the same as in the training data.
-ch_dat <- ch_dat %>% 
+ch_dat_debate <- ch_dat_debate %>% 
   rename(text = Text)
 
 # test if it works for the first model, i.e. the first DV
-sm_predict(model_forest[[i]], ch_dat)
+i = 1
+sm_predict(model_forest[[i]], ch_dat_debate)
 
 # function to predict all variables
-predict_all_variables <- function(model_forest, ch_dat){
+predict_all_variables <- function(model_forest, ch_dat_debate){
   # initialise vector
   predictions <- c()
   # loop through variables and make predictions
   for (i in 1:length(variables)){
     # bind predictions
-    predictions <- rbind(predictions, t(sm_predict(model_forest[[i]], ch_dat))) 
+    predictions <- rbind(predictions, t(sm_predict(model_forest[[i]], ch_dat_debate))) 
     print(paste0("Predictions for variable '", variables[i], "' finsihed"))
   }
   # transpose and rename
@@ -457,9 +464,9 @@ predict_all_variables <- function(model_forest, ch_dat){
 }
 
 # apply the function
-predictions_boost_tuned <- predict_all_variables(model_forest, ch_dat)
+predictions <- predict_all_variables(model_forest, ch_dat_debate)
 
-CH_predictions <- cbind(ch_dat, predictions_boost_tuned)
+CH_predictions <- cbind(ch_dat_debate, predictions)
 
 p_dist_perc_ch <- predictions_boost_tuned %>% 
   pivot_longer(., cols = everything()) %>% 
@@ -490,7 +497,6 @@ p_dist_perc_arr <- ggarrange(p_dist_perc_ch, p_dist_perc_de_train)
 ggsave(p_dist_perc_arr, file = "Plots/distribution_percentage_arranged.pdf")
 
 # reliability checks
-
 CH_relcheck <- readRDS("CH_energy_SML_reliabilitycheck.rds") %>% as_tibble()
 
 CH_relcheck <- CH_relcheck %>% 
@@ -500,6 +506,42 @@ predictions_relcheck <- predict_all_variables(model_forest, CH_relcheck)
 
 ch_relcheck_predicted <- cbind(CH_relcheck, predictions_relcheck)
 
+# confusion matrix
+c <- confusionMatrix(as.factor(ch_relcheck_predicted$Renewables), as.factor(ch_relcheck_predicted$renewables),
+                mode = "everything",
+                positive="1")
+
+# retrieve scores, like so
+c$overall
+c$byClass
+
+confusionMatrix(as.factor(ch_relcheck_predicted$`Competitiveness of Industry`), as.factor(ch_relcheck_predicted$competitiveness_of_industry),
+                mode = "everything",
+                positive="1")
+
+confusionMatrix(as.factor(ch_relcheck_predicted$Employment), as.factor(ch_relcheck_predicted$employment),
+                mode = "everything",
+                positive="1")
+
+confusionMatrix(as.factor(ch_relcheck_predicted$`Climate Change Mitigation`), as.factor(ch_relcheck_predicted$climate_change_mitigation),
+                mode = "everything",
+                positive="1")
+
+confusionMatrix(as.factor(ch_relcheck_predicted$`Pollution Reduction`), as.factor(ch_relcheck_predicted$pollution_reduction),
+                mode = "everything",
+                positive="1")
+
+confusionMatrix(as.factor(ch_relcheck_predicted$`Grid Extension`), as.factor(ch_relcheck_predicted$grid_extension),
+                mode = "everything",
+                positive="1")
+
+confusionMatrix(as.factor(ch_relcheck_predicted$`Increase of Actor Variety`), as.factor(ch_relcheck_predicted$increase_of_actor_variety),
+                mode = "everything",
+                positive="1")
+
+
+
+# I think this is no longer needed
 sum(ch_relcheck_predicted$Renewables == 1 & ch_relcheck_predicted$renewables == 1)/nrow(ch_relcheck_predicted)
 sum(ch_relcheck_predicted$Solar == 1 & ch_relcheck_predicted$solar == 1)/nrow(ch_relcheck_predicted)
 sum(ch_relcheck_predicted$Wind == 1 & ch_relcheck_predicted$wind == 1)/nrow(ch_relcheck_predicted)
