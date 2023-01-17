@@ -4,7 +4,7 @@
 # setwd("/Users/marcowyss/master-thesis-mw")
 setwd("/Users/simon/Documents/repo/Master-Thesis-Marco-Wyss")
 
-EEG_data <- read.csv("EEG_Daten_clean.csv", header = T)
+EEG_data <- read.csv("Data/EEG_Daten_clean.csv", header = T)
 
 # look at the values of the variables
 EEG_overview <- sapply(EEG_data, table)
