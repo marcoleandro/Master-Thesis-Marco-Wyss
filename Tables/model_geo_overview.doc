@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Statistical models</title>
+<style>
+table.texreg {margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;}
+table.texreg thead .rule {border-bottom: 1px solid #000000;}
+table.texreg tbody tr.rule td {border-top: 1px solid #000000;}
+table.texreg tbody tr.bottomrule td {border-bottom: 2px solid #000000;}
+table.texreg tfoot td {font-size: 0.8em;}
+table.texreg th, table.texreg td {padding-left: 5px;padding-right: 5px;}
+</style>
+</head>
+<body>
+<table class="texreg">
+<caption>Statistical models</caption>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Model 1</th>
+<th>Model 2</th>
+<th>Model 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rule">
+<td>(Intercept)</td>
+<td>7.16 (1.52)<sup>&#42;&#42;&#42;</sup></td>
+<td>4.77  (7.54)</td>
+<td>136.57  (31.16)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>amt_yes</td>
+<td>7.76 (2.95)<sup>&#42;&#42;</sup></td>
+<td>4.49  (2.69)</td>
+<td>5.01   (2.64)</td>
+</tr>
+<tr>
+<td>number_of_commission_memberships_first</td>
+<td>&nbsp;</td>
+<td>4.01  (1.43)<sup>&#42;&#42;</sup></td>
+<td>-66.91  (16.41)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypGeschäft des Bundesrates</td>
+<td>&nbsp;</td>
+<td>83.07  (6.03)<sup>&#42;&#42;&#42;</sup></td>
+<td>78.34   (6.05)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypInterpellation</td>
+<td>&nbsp;</td>
+<td>0.22  (4.47)</td>
+<td>0.12   (4.37)</td>
+</tr>
+<tr>
+<td>GeschäftstypMotion</td>
+<td>&nbsp;</td>
+<td>1.72  (2.88)</td>
+<td>1.78   (2.82)</td>
+</tr>
+<tr>
+<td>GeschäftstypParlamentarische Initiative</td>
+<td>&nbsp;</td>
+<td>13.81  (4.89)<sup>&#42;&#42;</sup></td>
+<td>13.87   (4.79)<sup>&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypPetition</td>
+<td>&nbsp;</td>
+<td>-2.91 (15.01)</td>
+<td>-3.17  (14.69)</td>
+</tr>
+<tr>
+<td>GeschäftstypPostulat</td>
+<td>&nbsp;</td>
+<td>0.18  (3.85)</td>
+<td>0.03   (3.77)</td>
+</tr>
+<tr>
+<td>GeschäftstypStandesinitiative</td>
+<td>&nbsp;</td>
+<td>1.89  (7.60)</td>
+<td>1.62   (7.44)</td>
+</tr>
+<tr>
+<td>ständerat_first</td>
+<td>&nbsp;</td>
+<td>-7.11  (7.07)</td>
+<td>-67.99  (15.58)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion CVP-EVP</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>1075.11 (248.08)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr class="rule">
+<td>R<sup>2</sup></td>
+<td>0.01</td>
+<td>0.32</td>
+<td>0.34</td>
+</tr>
+<tr>
+<td>Adj. R<sup>2</sup></td>
+<td>0.01</td>
+<td>0.31</td>
+<td>0.33</td>
+</tr>
+<tr class="bottomrule">
+<td>Num. obs.</td>
+<td>748</td>
+<td>748</td>
+<td>746</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="4"><sup>&#42;&#42;&#42;</sup>p &lt; 0.001; <sup>&#42;&#42;</sup>p &lt; 0.01; <sup>&#42;</sup>p &lt; 0.05</td>
+</tr>
+</tfoot>
+</table>
+</body>
+</html>

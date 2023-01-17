@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Statistical models</title>
+<style>
+table.texreg {margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;}
+table.texreg thead .rule {border-bottom: 1px solid #000000;}
+table.texreg tbody tr.rule td {border-top: 1px solid #000000;}
+table.texreg tbody tr.bottomrule td {border-bottom: 2px solid #000000;}
+table.texreg tfoot td {font-size: 0.8em;}
+table.texreg th, table.texreg td {padding-left: 5px;padding-right: 5px;}
+</style>
+</head>
+<body>
+<table class="texreg">
+<caption>Statistical models</caption>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Model 1</th>
+<th>Model 2</th>
+<th>Model 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rule">
+<td>(Intercept)</td>
+<td>6.98 (1.03)<sup>&#42;&#42;&#42;</sup></td>
+<td>2.91  (3.74)</td>
+<td>32.04 (11.95)<sup>&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>amt_yes</td>
+<td>3.84 (2.01)</td>
+<td>3.15  (2.05)</td>
+<td>3.26  (2.00)</td>
+</tr>
+<tr>
+<td>number_of_commission_memberships_first</td>
+<td>&nbsp;</td>
+<td>-2.40  (1.28)</td>
+<td>1.40  (2.10)</td>
+</tr>
+<tr>
+<td>GeschäftstypGeschäft des Bundesrates</td>
+<td>&nbsp;</td>
+<td>29.36  (3.47)<sup>&#42;&#42;&#42;</sup></td>
+<td>40.81  (4.04)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypInterpellation</td>
+<td>&nbsp;</td>
+<td>1.21  (3.62)</td>
+<td>1.05  (3.48)</td>
+</tr>
+<tr>
+<td>GeschäftstypMotion</td>
+<td>&nbsp;</td>
+<td>2.47  (2.33)</td>
+<td>2.55  (2.24)</td>
+</tr>
+<tr>
+<td>GeschäftstypParlamentarische Initiative</td>
+<td>&nbsp;</td>
+<td>10.74  (3.63)<sup>&#42;&#42;</sup></td>
+<td>11.96  (3.59)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypPetition</td>
+<td>&nbsp;</td>
+<td>-2.24 (12.34)</td>
+<td>-2.28 (11.82)</td>
+</tr>
+<tr>
+<td>GeschäftstypPostulat</td>
+<td>&nbsp;</td>
+<td>0.66  (3.13)</td>
+<td>0.60  (3.00)</td>
+</tr>
+<tr>
+<td>GeschäftstypStandesinitiative</td>
+<td>&nbsp;</td>
+<td>2.40  (6.09)</td>
+<td>2.80  (5.85)</td>
+</tr>
+<tr>
+<td>ständerat_first</td>
+<td>&nbsp;</td>
+<td>1.15  (3.05)</td>
+<td>-31.79 (13.25)<sup>&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFDP-Liberale Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-45.29 (14.67)<sup>&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion BD</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-51.72 (25.92)<sup>&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion CVP-EVP</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-66.58 (18.55)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion CVP/EVP/glp</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-10.73  (5.87)</td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion der Schweizerischen Volkspartei</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-34.25 (15.02)<sup>&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFreisinnig-demokratische Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-15.52  (8.11)</td>
+</tr>
+<tr>
+<td>ParlGroupName_firstGrüne Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-69.25 (21.64)<sup>&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstGrünliberale Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-51.00 (14.35)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstSozialdemokratische Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-49.48 (14.28)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr class="rule">
+<td>R<sup>2</sup></td>
+<td>0.00</td>
+<td>0.13</td>
+<td>0.16</td>
+</tr>
+<tr>
+<td>Adj. R<sup>2</sup></td>
+<td>0.00</td>
+<td>0.12</td>
+<td>0.14</td>
+</tr>
+<tr class="bottomrule">
+<td>Num. obs.</td>
+<td>863</td>
+<td>863</td>
+<td>834</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="4"><sup>&#42;&#42;&#42;</sup>p &lt; 0.001; <sup>&#42;&#42;</sup>p &lt; 0.01; <sup>&#42;</sup>p &lt; 0.05</td>
+</tr>
+</tfoot>
+</table>
+</body>
+</html>

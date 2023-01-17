@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Statistical models</title>
+<style>
+table.texreg {margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;}
+table.texreg thead .rule {border-bottom: 1px solid #000000;}
+table.texreg tbody tr.rule td {border-top: 1px solid #000000;}
+table.texreg tbody tr.bottomrule td {border-bottom: 2px solid #000000;}
+table.texreg tfoot td {font-size: 0.8em;}
+table.texreg th, table.texreg td {padding-left: 5px;padding-right: 5px;}
+</style>
+</head>
+<body>
+<table class="texreg">
+<caption>Statistical models</caption>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Model 1</th>
+<th>Model 2</th>
+<th>Model 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rule">
+<td>(Intercept)</td>
+<td>7.61 (0.71)<sup>&#42;&#42;&#42;</sup></td>
+<td>10.86 (2.01)<sup>&#42;&#42;&#42;</sup></td>
+<td>20.13  (5.35)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>amt_yes</td>
+<td>0.81 (1.41)</td>
+<td>0.99 (1.31)</td>
+<td>0.47  (1.16)</td>
+</tr>
+<tr>
+<td>number_of_commission_memberships_first</td>
+<td>&nbsp;</td>
+<td>-2.25 (0.61)<sup>&#42;&#42;&#42;</sup></td>
+<td>-0.69  (0.99)</td>
+</tr>
+<tr>
+<td>GeschäftstypGeschäft des Bundesrates</td>
+<td>&nbsp;</td>
+<td>25.53 (2.28)<sup>&#42;&#42;&#42;</sup></td>
+<td>24.48  (2.19)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypInterpellation</td>
+<td>&nbsp;</td>
+<td>0.87 (2.26)</td>
+<td>1.50  (1.98)</td>
+</tr>
+<tr>
+<td>GeschäftstypMotion</td>
+<td>&nbsp;</td>
+<td>2.53 (1.48)</td>
+<td>2.93  (1.30)<sup>&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypParlamentarische Initiative</td>
+<td>&nbsp;</td>
+<td>6.52 (2.23)<sup>&#42;&#42;</sup></td>
+<td>7.41  (1.97)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypPetition</td>
+<td>&nbsp;</td>
+<td>-1.02 (7.86)</td>
+<td>-0.84  (6.87)</td>
+</tr>
+<tr>
+<td>GeschäftstypPostulat</td>
+<td>&nbsp;</td>
+<td>0.53 (1.97)</td>
+<td>0.89  (1.73)</td>
+</tr>
+<tr>
+<td>GeschäftstypStandesinitiative</td>
+<td>&nbsp;</td>
+<td>2.10 (3.89)</td>
+<td>2.73  (3.41)</td>
+</tr>
+<tr>
+<td>ständerat_first</td>
+<td>&nbsp;</td>
+<td>-7.09 (1.78)<sup>&#42;&#42;&#42;</sup></td>
+<td>-17.83  (5.83)<sup>&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstEvangelische und Unabhängige Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-14.93  (8.34)</td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFDP-Liberale Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-21.30  (8.85)<sup>&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion BD</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-23.51 (10.97)<sup>&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion CVP-EVP</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-10.25 (10.72)</td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion CVP/EVP/glp</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-6.86  (6.21)</td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFraktion der Schweizerischen Volkspartei</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-15.14  (6.77)<sup>&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstFreisinnig-demokratische Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-14.72  (5.64)<sup>&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>ParlGroupName_firstGrüne Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-12.79  (7.29)</td>
+</tr>
+<tr>
+<td>ParlGroupName_firstGrünliberale Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-24.40 (13.75)</td>
+</tr>
+<tr>
+<td>ParlGroupName_firstSozialdemokratische Fraktion</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>-7.21  (5.86)</td>
+</tr>
+<tr class="rule">
+<td>R<sup>2</sup></td>
+<td>0.00</td>
+<td>0.29</td>
+<td>0.27</td>
+</tr>
+<tr>
+<td>Adj. R<sup>2</sup></td>
+<td>-0.00</td>
+<td>0.28</td>
+<td>0.26</td>
+</tr>
+<tr class="bottomrule">
+<td>Num. obs.</td>
+<td>882</td>
+<td>882</td>
+<td>866</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="4"><sup>&#42;&#42;&#42;</sup>p &lt; 0.001; <sup>&#42;&#42;</sup>p &lt; 0.01; <sup>&#42;</sup>p &lt; 0.05</td>
+</tr>
+</tfoot>
+</table>
+</body>
+</html>

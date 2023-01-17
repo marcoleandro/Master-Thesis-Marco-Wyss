@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Statistical models</title>
+<style>
+table.texreg {margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;}
+table.texreg thead .rule {border-bottom: 1px solid #000000;}
+table.texreg tbody tr.rule td {border-top: 1px solid #000000;}
+table.texreg tbody tr.bottomrule td {border-bottom: 2px solid #000000;}
+table.texreg tfoot td {font-size: 0.8em;}
+table.texreg th, table.texreg td {padding-left: 5px;padding-right: 5px;}
+</style>
+</head>
+<body>
+<table class="texreg">
+<caption>Statistical models</caption>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>Model 1</th>
+<th>Model 2</th>
+<th>Model 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="rule">
+<td>(Intercept)</td>
+<td>7.15 (1.45)<sup>&#42;&#42;&#42;</sup></td>
+<td>28.94  (7.21)<sup>&#42;&#42;&#42;</sup></td>
+<td>28.06  (7.44)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>amt_yes</td>
+<td>7.60 (2.80)<sup>&#42;&#42;</sup></td>
+<td>4.83  (2.54)</td>
+<td>3.68  (2.36)</td>
+</tr>
+<tr>
+<td>number_of_commission_memberships_first</td>
+<td>&nbsp;</td>
+<td>0.12  (1.14)</td>
+<td>0.13  (1.06)</td>
+</tr>
+<tr>
+<td>GeschäftstypGeschäft des Bundesrates</td>
+<td>&nbsp;</td>
+<td>72.86  (5.71)<sup>&#42;&#42;&#42;</sup></td>
+<td>73.15  (5.37)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypInterpellation</td>
+<td>&nbsp;</td>
+<td>0.26  (4.27)</td>
+<td>0.85  (3.95)</td>
+</tr>
+<tr>
+<td>GeschäftstypMotion</td>
+<td>&nbsp;</td>
+<td>1.37  (2.75)</td>
+<td>1.81  (2.54)</td>
+</tr>
+<tr>
+<td>GeschäftstypParlamentarische Initiative</td>
+<td>&nbsp;</td>
+<td>13.04  (4.61)<sup>&#42;&#42;</sup></td>
+<td>13.39  (4.26)<sup>&#42;&#42;</sup></td>
+</tr>
+<tr>
+<td>GeschäftstypPetition</td>
+<td>&nbsp;</td>
+<td>-3.08 (14.28)</td>
+<td>-2.51 (13.21)</td>
+</tr>
+<tr>
+<td>GeschäftstypPostulat</td>
+<td>&nbsp;</td>
+<td>-0.25  (3.65)</td>
+<td>0.09  (3.37)</td>
+</tr>
+<tr>
+<td>GeschäftstypStandesinitiative</td>
+<td>&nbsp;</td>
+<td>1.72  (7.23)</td>
+<td>2.32  (6.69)</td>
+</tr>
+<tr>
+<td>ständerat_first</td>
+<td>&nbsp;</td>
+<td>-27.40  (7.03)<sup>&#42;&#42;&#42;</sup></td>
+<td>-26.52  (7.27)<sup>&#42;&#42;&#42;</sup></td>
+</tr>
+<tr class="rule">
+<td>R<sup>2</sup></td>
+<td>0.01</td>
+<td>0.33</td>
+<td>0.31</td>
+</tr>
+<tr>
+<td>Adj. R<sup>2</sup></td>
+<td>0.01</td>
+<td>0.32</td>
+<td>0.30</td>
+</tr>
+<tr class="bottomrule">
+<td>Num. obs.</td>
+<td>750</td>
+<td>750</td>
+<td>743</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="4"><sup>&#42;&#42;&#42;</sup>p &lt; 0.001; <sup>&#42;&#42;</sup>p &lt; 0.01; <sup>&#42;</sup>p &lt; 0.05</td>
+</tr>
+</tfoot>
+</table>
+</body>
+</html>
