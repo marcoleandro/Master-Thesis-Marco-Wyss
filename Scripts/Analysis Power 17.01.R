@@ -491,7 +491,11 @@ effect_size_plot <- bind_rows(extract_res(mod3.1, "Renewable Energy (in general)
                                `Pr(>|t|)` < 0.001 ~ "***",
                                `Pr(>|t|)` < 0.01 ~ "**",
                                `Pr(>|t|)` < 0.05 ~ "*",)
-  ) %>% 
+  ) 
+
+effect_size_plot$dep_var <- factor(effect_size_plot$dep_var, levels = c("Grid Extension", "Substitution of Limited Resources", "Mitigation of Nuclear Risk", "Pollution Reduction", "Climate Change Mitigation", "Energy Democracy", "Employment", "Innovation", "Swiss Value Chain", "Competitiveness of Swiss Industry", "Costs of Electricity", "Avoidance of Dependencies", "Security of Electricity Supply", "Environmental Protection", "Energy Efficiency", "Nuclear Energy", "Geothermal Energy", "Biomass Energy", "Wind Energy", "Water Energy", "Solar Energy", "Renewable Energy (in general)"))
+
+effect_size_plot %>%
   ggplot() +
   geom_pointrange(aes(y = Estimate, 
                       x = dep_var, 
@@ -507,7 +511,7 @@ effect_size_plot <- bind_rows(extract_res(mod3.1, "Renewable Energy (in general)
 effect_size_plot
 
 # save the plot with a specific height and width in the Plots folder
-ggsave(effect_size_plot, filename = "Plots/effect_size_plot.pdf", width = 10, height = 5)
+ggsave(filename = "Plots/effect_size_plot.pdf", effect_size_plot, width = 10, height = 5)
 
 
 # model overview for appendix
